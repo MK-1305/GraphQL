@@ -1,35 +1,29 @@
-const {ApolloServer, gql } = require('apollo-server');
+const { ApolloServer, gql } = require("apollo-server");
 
 const books = [
-    {
-        title: "吾輩は猫である",
-        author: "夏目 漱石",
-    },
-    {
-        title: "走れメロス",
-        author: "太宰 治",
-    }
-]
+  { title: "吾輩は猫である", author: "夏目 漱石" },
+  { title: "走れメロス", author: "太宰 治" },
+];
 
 const typeDefs = gql`
-    type Book {
-        title: String,
-        author: String,
-    }
+  type Book {
+    title: String
+    author: String
+  }
 
-    type Query {
-        test: [Book]
-    }
+  type Query {
+    test: [Book]
+  }
 `;
 
 const resolvers = {
-    Query: {
-        test: () => books,
-    },
+  Query: {
+    test: () => books,
+  },
 };
 
-const server = new ApolloServer({typeDefs, resolvers});
+const server = new ApolloServer({ typeDefs, resolvers });
 
-server.listen().then(({url}) => {
-    console.log(`🚀 Server ready at ${url}`);
+server.listen({ port: 4000 }).then(({ url }) => {
+  console.log(`🚀  Server ready at ${url}`);
 });
